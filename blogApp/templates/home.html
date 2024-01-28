@@ -6,6 +6,12 @@
     <title>Travel Blog</title>
 </head>
 <body>
-    <h1>Hola!!</h1>
+    <h1>User List</h1>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.name }}  {{ user.lastname }} - {{ user.email }}</li>
+            <!-- You can access other fields of the user model as needed -->
+        {% endfor %}
+    </ul>
 </body>
 </html>

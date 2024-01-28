@@ -1,13 +1,15 @@
 from django.shortcuts import HttpResponse
 from django.template import loader
+from blogApp.models import user, comment, blogEntry
 
 
-# Create your views here.
 def home(request):
+    users = user.objects.all()
+
     template = loader.get_template("home.html")
 
-    dictionary = {}
-
+    dictionary = {"users": users}
+    print(dictionary)
     document = template.render(dictionary)
 
     return HttpResponse(document)
