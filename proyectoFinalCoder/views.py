@@ -4,7 +4,6 @@ from django.template import loader
 # from proyectoFinalCoder.models import user
 
 
-# Create your views here.
 def login(request):
     # users = user.objects.all()
 
