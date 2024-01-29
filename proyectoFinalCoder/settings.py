@@ -56,8 +56,8 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            "/Develop/Coder/Python/proyectoFinal/proyectoFinalCoder/proyectoFinalCoder/templates/",
-            "/f/Develop/Coder/Python/proyectoFinal/proyectoFinalCoder/blogApp/templates/",
+            "/Users/andresnrubio/Cursos/CODER_HOUSE/Python/PythonCoderhouse_PF/proyectoFinalCoder/templates/",
+            "/Users/andresnrubio/Cursos/CODER_HOUSE/Python/PythonCoderhouse_PF/blogApp/templates/",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
