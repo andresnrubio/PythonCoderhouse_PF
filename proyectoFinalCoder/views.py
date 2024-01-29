@@ -14,3 +14,15 @@ def login(request):
     document = template.render(dictionary)
 
     return HttpResponse(document)
+
+
+def register(request):
+    
+    
+    template = loader.get_template("register.html")
+
+    dictionary = {}
+
+    document = template.render(dictionary)
+
+    return HttpResponse(document)

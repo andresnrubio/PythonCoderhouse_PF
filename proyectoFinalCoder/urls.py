@@ -22,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("blogApp/", include("blogApp.urls")),
     path("login/", views.login, name="login"),
+    path("register/", views.register, name="register"),
 ]
