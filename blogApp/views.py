@@ -16,3 +16,14 @@ def home(request):
     document = template.render(dictionary)
 
     return HttpResponse(document)
+
+
+def navBar(request):
+    
+    template = loader.get_template("navbar.html")
+
+    dictionary ={}
+    
+    document = template.render(dictionary)
+
+    return HttpResponse(document)
