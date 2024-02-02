@@ -6,5 +6,7 @@ urlpatterns = [
     path("", views.redirectToHome),
     path("home/", views.home, name="home"),
     # path("about/", views.about),
-    # path("pages/<pageid>", views.pages),
-]
+    path("pages/<pageid>", views.pages, name="pages"),
+    path("pages/", views.pages, name="pages"),
+    ]
+

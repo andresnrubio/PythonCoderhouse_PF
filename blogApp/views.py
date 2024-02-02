@@ -9,7 +9,18 @@ def redirectToHome(request):
     
 def home(request):
 
-    template = loader.get_template("home.html")
+    template = loader.get_template("index.html")
+
+    dictionary ={}
+    
+    document = template.render(dictionary)
+
+    return HttpResponse(document)
+
+
+def pages(request):
+
+    template = loader.get_template("entryDetail.html")
 
     dictionary ={}
     
