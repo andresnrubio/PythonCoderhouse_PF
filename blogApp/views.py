@@ -29,6 +29,26 @@ def pages(request):
     return HttpResponse(document)
 
 
+def entryDetail(request):
+
+    template = loader.get_template("entryDetail.html")
+
+    dictionary ={}
+    
+    document = template.render(dictionary)
+
+    return HttpResponse(document)
+
+def elements(request):
+
+    template = loader.get_template("elements.html")
+
+    dictionary ={}
+    
+    document = template.render(dictionary)
+
+    return HttpResponse(document)
+
 def navBar(request):
     
     template = loader.get_template("navbar.html")
