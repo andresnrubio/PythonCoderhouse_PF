@@ -1,6 +1,6 @@
 from django.shortcuts import HttpResponse,redirect
 from django.template import loader
-from blogApp.models import  comment, blogEntry
+from blogApp.models import  Comment, BlogEntry
 
 def redirectToHome(request):
     
@@ -9,10 +9,12 @@ def redirectToHome(request):
     
 def home(request):
 
+    entries = BlogEntry.objects.all()
+
     template = loader.get_template("index.html")
 
-    dictionary ={}
-    
+    dictionary ={ 'entries': entries }
+        
     document = template.render(dictionary)
 
     return HttpResponse(document)
@@ -29,11 +31,14 @@ def pages(request):
     return HttpResponse(document)
 
 
-def entryDetail(request):
+def entryDetail(request, entryId):
+
+    entry = BlogEntry.objects.get(pk=entryId)
+
 
     template = loader.get_template("entryDetail.html")
 
-    dictionary ={}
+    dictionary ={ 'entry': entry }
     
     document = template.render(dictionary)
 
