@@ -1,33 +1,31 @@
 {% extends "index.html" %} {%load static%} {%block mainContent%}
 
-{%comment%}Titulo, subtitulo, cuerpo, autor, fecha, imagen {% endcomment %}
-<!-- Main -->
 <div id="main">
   <div class="inner">
     <h1>{{entry.title}}</h1>
-    <span class="image main"><img src="{% static 'assets/' %}{{ entry.imgUrl }}"  alt="{{ entry.imgUrl }}" /></span>
-    <p>
-		{{entry.subtitle}}
-    </p>
-    <p>
+    <span class="image main"
+      ><img
+        src="{% static 'assets/' %}{{ entry.imgUrl }}"
+        alt="{{ entry.imgUrl }}"
+    /></span>
+    <h2>{{entry.subtitle}}</h2>
+    <p>{{entry.introduction}}</p>
+    <h3>5 Lugares infaltables</h3>
+    <ul style="padding: 0 2rem">
+      {% for item in entry.content_list %}
+      <li>{{item}}</li>
+      {% endfor %}
+    </ul>
 
-		<h3>5 Lugares infaltables</h3>
-<ul>
-	{% for item in entry.content_list %}
-	<li>
-		{{item}}
-	</li>
-	{% endfor %}
-
-</ul>
-    </p>
-    <p>
-{{entry.resume}}
-    </p>
+    <p>{{entry.resume}}</p>
   </div>
   {% for entry in entries %}
- <p>{{entry.title}}</p> 
+  <p>{{entry.title}}</p>
   {% endfor %}
+  <ul class="entryFooter">
+	<li>{{entry.author}}</li>
+	<li>{{entry.date}}</li>
+  </ul>
 </div>
 
 {%endblock%}

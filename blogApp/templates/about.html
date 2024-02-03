@@ -1,0 +1,43 @@
+{% extends "index.html" %} {%load static%} {%block mainContent%}
+{%comment%}Titulo, subtitulo, cuerpo, autor, fecha, imagen {% endcomment %}
+<!-- Main -->
+<div id="main">
+  <div class="inner">
+    <h1>Hola! Mi nombre es Andrés</h1>
+    {% comment %}
+    <span class="image main"
+      ><img
+        src="{% static 'assets/' %}{{ entry.imgUrl }}"
+        alt="{{ entry.imgUrl }}"
+    /></span>
+    {% endcomment %}
+    <blockquote>
+      <p>
+        Soy un apasionado desarrollador de Argentina con tres años de
+        experiencia en el mundo de la programación. Me encuentro inmerso en un
+        emocionante proyecto de aprendizaje en la academia Coderhouse, donde
+        estoy explorando las maravillas de Python y Django. El desafío actual es
+        crear un sitio estilo blog como parte de este curso, lo cual me ofrece
+        una oportunidad única para aplicar mis habilidades y conocimientos en un
+        proyecto práctico y relevante.
+      </p>
+
+      <p>
+        Desde que ingresé al mundo del desarrollo, me he dedicado a mantenerme
+        actualizado con las últimas tecnologías y tendencias. Creo firmemente en
+        la importancia de la educación continua y en la exploración constante de
+        nuevas herramientas y técnicas. Esta mentalidad de aprendizaje continuo
+        no solo enriquece mi propio desarrollo profesional, sino que también
+        mejora la calidad de los proyectos en los que trabajo.
+      </p>
+    </blockquote>
+
+    <p>
+      <i>
+      ¡Gracias por visitar mi sitio y ser parte de esta emocionante travesía!
+      </i>
+    </p>
+  </div>
+</div>
+
+{%endblock%}

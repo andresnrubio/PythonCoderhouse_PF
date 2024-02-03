@@ -20,17 +20,6 @@ def home(request):
     return HttpResponse(document)
 
 
-def pages(request):
-
-    template = loader.get_template("entryDetail.html")
-
-    dictionary ={}
-    
-    document = template.render(dictionary)
-
-    return HttpResponse(document)
-
-
 def entryDetail(request, entryId):
 
     entry = BlogEntry.objects.get(pk=entryId)
@@ -44,6 +33,18 @@ def entryDetail(request, entryId):
 
     return HttpResponse(document)
 
+
+def about(request):
+
+    template = loader.get_template("about.html")
+
+    dictionary ={}
+    
+    document = template.render(dictionary)
+
+    return HttpResponse(document)
+
+
 def elements(request):
 
     template = loader.get_template("elements.html")
@@ -54,12 +55,3 @@ def elements(request):
 
     return HttpResponse(document)
 
-def navBar(request):
-    
-    template = loader.get_template("navbar.html")
-
-    dictionary ={}
-    
-    document = template.render(dictionary)
-
-    return HttpResponse(document)

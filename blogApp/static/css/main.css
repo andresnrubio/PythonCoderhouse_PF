@@ -3326,3 +3326,17 @@ input, select, textarea {
 			}
 
 		}
+
+
+	/* Estilos adicionales */
+
+
+	.entryFooter {
+		all: unset;
+		width: 100%;
+		padding: 0;
+		margin-top: 5em;
+		list-style: none;
+		font-size: 0.8em;
+		color: rgba(88, 88, 88, 0.5);
+	}
