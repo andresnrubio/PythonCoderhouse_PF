@@ -1,0 +1,49 @@
+{% extends "index.html" %} {%load static%} {%block mainContent%}
+
+<div id="main">
+  <div class="inner">
+    <h2>Vista previa</h2>
+    <h1>{{entry.title}}</h1>
+    <span class="image main">
+      <img
+        src="{% static 'assets/' %}{{ entry.imgUrl }}"
+        alt="{{ entry.imgUrl }}"
+      />
+    </span>
+    <h2>{{entry.subtitle}}</h2>
+    <p>{{entry.introduction}}</p>
+    <h3>5 Lugares infaltables</h3>
+    <ul style="padding: 0 2rem">
+      {% for item in entry.content_list %}
+      <li>{{item}}</li>
+      {% endfor %}
+    </ul>
+
+    <p>{{entry.resume}}</p>
+    {% for entry in entries %}
+    <p>{{entry.title}}</p>
+    {% endfor %}
+    <ul class="entryFooter">
+      <li>{{entry.author}}</li>
+      <li>{{entry.date}}</li>
+    </ul>
+      <form action="/newentry/" method="POST" style="display:flex; justify-content:flex-end; gap: 2rem; margin-top: 3rem">
+
+    <button
+    type="submit"
+    value="True"
+    name="save"
+    class="primary"
+    >Guardar</button>
+    <button
+    type="submit"
+    value="False"
+    name="save"
+    class="reset"
+    >Cancelar</button>
+  </form>
+
+  </div>
+  </div>
+
+{%endblock%}
