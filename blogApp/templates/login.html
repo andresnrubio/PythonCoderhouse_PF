@@ -1,0 +1,59 @@
+{% extends "index.html" %} {%load static%} {%block mainContent%}
+
+<div id="main">
+  <div class="inner">
+    <form action="/login/" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <h1>Inicio de sesión</h1>
+      <div
+        style="
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <div class="col-6 col-12-xsmall" style="margin: 1rem 0; width: 45%; display: flex; gap: 2rem">
+          
+        </div>
+
+        <div class="col-6 col-12-xsmall" style="margin: 1rem 0; width: 45%">
+          <label for="email">Correo electrónico</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value=""
+            placeholder=""
+            required
+          />
+        </div>
+        <div class="col-6 col-12-xsmall" style="margin: 1rem 0; width: 45%">
+          <label for="password">Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value=""
+            placeholder=""
+            required
+          />
+        </div>
+        <div
+          style="
+            width: 100%;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+          "
+        >
+          <p style="align-self: center; margin: 0 2rem">Aun no te has registrado?  <span><a href="/signup/">Haz click Aquí</a></span></p><input type="submit" value="Inicia sesión" class="primary" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{%endblock%}

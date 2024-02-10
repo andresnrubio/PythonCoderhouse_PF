@@ -16,9 +16,8 @@ class Comment(models.Model):
     comment = models.CharField(max_length=400)
     date = models.DateField()
 
-
-# class user(models.Model):
-#     username = models.CharField(max_length=50)
-#     name = models.CharField(max_length=50)
-#     lastname = models.CharField(max_length=50)
-#     email = models.EmailField(max_length=254)
+class user(models.Model):
+    name = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254)
+    password = models.CharField(max_length=50)

@@ -21,6 +21,4 @@ from proyectoFinalCoder import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("blogApp.urls")),
-    path("login/", views.login, name="login"),
-    path("signup/", views.register, name="register"),
 ]

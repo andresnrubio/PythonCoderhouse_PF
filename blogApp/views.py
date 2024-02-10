@@ -1,10 +1,9 @@
 from django.shortcuts import HttpResponse, redirect
 from django.template import loader
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 import os
-from django.shortcuts import render
-from blogApp.models import Comment, BlogEntry
-from blogApp.forms import newEntryForm
+from blogApp.models import Comment, BlogEntry, user
+from blogApp.forms import newEntryForm, signupForm, loginForm
 from datetime import datetime
 
 
@@ -17,7 +16,9 @@ def home(request):
 
     template = loader.get_template("index.html")
 
-    dictionary = {"entries": entries}
+    admin = False
+
+    dictionary = {"entries": entries, "admin": admin}
 
     document = template.render(dictionary)
 
@@ -136,6 +137,62 @@ def about(request):
 
 def elements(request):
     template = loader.get_template("elements.html")
+
+    dictionary = {}
+
+    document = template.render(dictionary)
+
+    return HttpResponse(document)
+
+
+@csrf_exempt
+def login(request):
+    # users = user.objects.all()
+
+    if request.method == "POST":
+        form = loginForm(request.POST)
+        if form.is_valid():
+            informacion = form.cleaned_data
+
+            print(informacion)
+
+    template = loader.get_template("login.html")
+
+    dictionary = {}
+
+    document = template.render(dictionary)
+
+    return HttpResponse(document)
+
+
+@csrf_exempt
+def signup(request):
+    if request.method == "POST":
+        form = signupForm(request.POST)
+        if form.is_valid():
+            informacion = form.cleaned_data
+            
+            newUser = user(
+                name=informacion["name"],
+                lastname=informacion["lastname"],
+                email=informacion["email"],
+                password=informacion["password"],
+            )
+            
+            newUser.save()
+            
+            return redirect("/")
+            
+            # template = loader.get_template("index.html")
+
+            # dictionary = {"admin": True}
+
+            # document = template.render(dictionary)
+
+            # return HttpResponse(document)
+            
+
+    template = loader.get_template("signup.html")
 
     dictionary = {}
 

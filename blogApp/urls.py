@@ -9,5 +9,7 @@ urlpatterns = [
     path("pages/<entryId>", views.entryDetail, name="entryDetail"),
     path("elements/", views.elements, name="elements"),
     path("newentry/", views.newEntry, name="newentry"),
+    path("login/", views.login, name="login"),
+    path("signup/", views.signup, name="signup"),
     ]
 

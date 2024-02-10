@@ -1,0 +1,80 @@
+{% extends "index.html" %} {%load static%} {%block mainContent%}
+
+<div id="main">
+  <div class="inner">
+    <form action="/signup/" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <h1>Registro</h1>
+      <div
+        style="
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <div class="col-6 col-12-xsmall" style="margin: 1rem 0; width: 45%; display: flex; gap: 2rem">
+          <div style=" width: 100%;">
+            <label for="name">Nombre</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value=""
+              placeholder=""
+              required
+            />
+          </div>
+          <div style=" width: 100%;">
+            <label for="lastname">Apellido</label>
+            <input
+              type="text"
+              name="lastname"
+              id="lastname"
+              value=""
+              placeholder=""
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-6 col-12-xsmall" style="margin: 1rem 0; width: 45%">
+          <label for="email">Correo electrónico</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value=""
+            placeholder=""
+            required
+          />
+        </div>
+        <div class="col-6 col-12-xsmall" style="margin: 1rem 0; width: 45%">
+          <label for="password">Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value=""
+            placeholder=""
+            required
+          />
+        </div>
+        <div
+          style="
+            width: 100%;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+          "
+        >
+          <p style="align-self: center; margin: 0 2rem">Ya tienes cuenta?  <span><a href="/login/">Inicia sesión</a></span></p><input type="submit" value="Registrarse" class="primary" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{%endblock%}

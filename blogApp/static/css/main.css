@@ -2132,7 +2132,7 @@ label {
 	display: block;
 	font-size: 0.9em;
 	font-weight: 900;
-	margin: 0 0 1em 0;
+	/* margin: 0 0 1em 0; */
 }
 
 input[type="text"],
@@ -2854,7 +2854,7 @@ body.is-touch .tiles article .content {
 /* Header */
 
 #header {
-	padding: 8em 0 0.1em 0;
+	padding: 4em 0 0.1em 0;
 }
 
 #header .logo {
