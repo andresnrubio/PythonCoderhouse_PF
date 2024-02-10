@@ -16,7 +16,7 @@ def home(request):
 
     template = loader.get_template("index.html")
 
-    admin = False
+    admin = True
 
     dictionary = {"entries": entries, "admin": admin}
 
