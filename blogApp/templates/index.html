@@ -35,12 +35,16 @@
       <nav id="menu">
         <h2>Menu</h2>
         <ul>
-          <li><a href="../">Home</a></li>
-		  {% if admin %}
-          <li><a href="../newentry">Nueva entrada</a></li>
-		  {% endif %}
-          <li><a href="../about">Sobre mi</a></li>
-          <li><a href="../login">Login</a></li>
+            <li><a href="../">Home</a></li>
+            {% if admin %}
+            <li><a href="../newentry">Nueva entrada</a></li>
+            {% endif %}
+            <li><a href="../about">Sobre mi</a></li>
+            {% if admin %}
+            <li><a href="../logout">Logout</a></li>
+            {% else %}
+            <li><a href="../login">Login</a></li>
+            {% endif %}
           <li><a href="../admin">Admin</a></li>
         </ul>
       </nav>

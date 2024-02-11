@@ -11,6 +11,9 @@ class BlogEntry(models.Model):
     imgLogo= models.CharField(max_length=100, null=True)
     date = models.DateField()
     
+    def __str__(self) -> str:
+        return super().__str__()
+    
 class Comment(models.Model):
     username = models.CharField(max_length=50)
     comment = models.CharField(max_length=400)
@@ -21,3 +24,6 @@ class user(models.Model):
     lastname = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
     password = models.CharField(max_length=50)
+    
+    def __str__(self) -> str:
+        return super().__str__()

@@ -5,6 +5,8 @@ import os
 from blogApp.models import Comment, BlogEntry, user
 from blogApp.forms import newEntryForm, signupForm, loginForm
 from datetime import datetime
+from django.contrib import messages
+
 
 
 def redirectToHome(request):
@@ -16,7 +18,12 @@ def home(request):
 
     template = loader.get_template("index.html")
 
-    admin = True
+    admin = False
+    
+    if('admin' in request.session):
+        print(admin)
+        admin  = request.session['admin']
+        print(admin)
 
     dictionary = {"entries": entries, "admin": admin}
 
@@ -151,10 +158,25 @@ def login(request):
 
     if request.method == "POST":
         form = loginForm(request.POST)
-        if form.is_valid():
-            informacion = form.cleaned_data
 
-            print(informacion)
+        if form.is_valid():
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            try:
+                userExists = user.objects.get(email=email)
+                if userExists.password == password:
+                    request.session['name'] = userExists.name
+                    request.session['lastname'] = userExists.lastname
+                    request.session['email'] = userExists.email
+                    request.session['admin'] = True 
+                
+                    return redirect('/home/')     
+                else:
+                    # Password is incorrect
+                    messages.error(request, 'Invalid email or password.')
+            except user.DoesNotExist:
+                # User with provided email does not exist
+                messages.error(request, 'Invalid email or password.')
 
     template = loader.get_template("login.html")
 
@@ -164,6 +186,11 @@ def login(request):
 
     return HttpResponse(document)
 
+def logout(request):
+    
+    request.session.flush()
+                    
+    return redirect('/login/')
 
 @csrf_exempt
 def signup(request):
@@ -182,15 +209,6 @@ def signup(request):
             newUser.save()
             
             return redirect("/")
-            
-            # template = loader.get_template("index.html")
-
-            # dictionary = {"admin": True}
-
-            # document = template.render(dictionary)
-
-            # return HttpResponse(document)
-            
 
     template = loader.get_template("signup.html")
 
