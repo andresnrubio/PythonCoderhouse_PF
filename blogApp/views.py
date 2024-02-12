@@ -2,8 +2,8 @@ from django.shortcuts import HttpResponse, redirect
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 import os
-from blogApp.models import Comment, BlogEntry, user
-from blogApp.forms import newEntryForm, signupForm, loginForm
+from blogApp.models import BlogEntry, user
+from blogApp.forms import newEntryForm, signupForm, loginForm, commentForm
 from datetime import datetime
 from django.contrib import messages
 
@@ -18,14 +18,13 @@ def home(request):
 
     template = loader.get_template("index.html")
 
-    admin = False
+    user = {}
     
-    if('admin' in request.session):
-        print(admin)
-        admin  = request.session['admin']
-        print(admin)
+    if('logged' in request.session):
+        user['role']  = request.session['role']
+        print(user)
 
-    dictionary = {"entries": entries, "admin": admin}
+    dictionary = {"entries": entries, "user": user}
 
     document = template.render(dictionary)
 
@@ -35,12 +34,18 @@ def home(request):
 def entryDetail(request, entryId):
     entry = BlogEntry.objects.get(pk=entryId)
 
-    print(entry)
-    admin = True
+    if request.method == "POST":
+        form = commentForm(request.POST)
+
+    user = {}
+
+    if('logged' in request.session):
+        user['role']  = request.session['role']
+        print(user)
 
     template = loader.get_template("entryDetail.html")
 
-    dictionary = {"entry": entry, "admin": admin}
+    dictionary = {"entry": entry, "user": user}
 
     document = template.render(dictionary)
 
@@ -168,7 +173,8 @@ def login(request):
                     request.session['name'] = userExists.name
                     request.session['lastname'] = userExists.lastname
                     request.session['email'] = userExists.email
-                    request.session['admin'] = True 
+                    request.session['role'] = userExists.role
+                    request.session['logged'] = True
                 
                     return redirect('/home/')     
                 else:

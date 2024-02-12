@@ -10,20 +10,30 @@ class BlogEntry(models.Model):
     imgUrl = models.CharField(max_length=100, null=True)
     imgLogo= models.CharField(max_length=100, null=True)
     date = models.DateField()
-    
+    comment_list = models.JSONField(default=list, null=True) 
+
     def __str__(self) -> str:
         return super().__str__()
     
 class Comment(models.Model):
-    username = models.CharField(max_length=50)
+    fullname = models.CharField(max_length=100, default="Anonimo")
     comment = models.CharField(max_length=400)
     date = models.DateField()
 
 class user(models.Model):
+    ROLE_CHOICES = [
+        ('admin', 'Admin'),
+        ('visitor', 'Visitor'),
+        ('moderator', 'Moderator'),
+    ]
+
     name = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
     password = models.CharField(max_length=50)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default="visitor")
     
     def __str__(self) -> str:
         return super().__str__()
+
+

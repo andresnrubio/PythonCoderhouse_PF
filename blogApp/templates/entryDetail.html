@@ -23,9 +23,69 @@
   <p>{{entry.title}}</p>
   {% endfor %}
   <ul class="entryFooter">
-	<li>{{entry.author}}</li>
-	<li>{{entry.date}}</li>
+    <li>{{entry.author}}</li>
+    <li>{{entry.date}}</li>
   </ul>
+</div>
+
+<div id="main">
+  <div class="inner">
+    {% comment %} {% if user.role == 'visitor' %} {% endcomment %}
+    <form action="/newentry/" method="POST" enctype="multipart/form-data">
+      <label>Dejame un comentario</label>
+      <textarea
+        type="text"
+        name="comment"
+        id="comment"
+        value=""
+        placeholder=""
+        rows="1"
+        cols="20"
+        required
+        {%
+        if
+        user.role
+        !="visitor"
+        %}disabled{%
+        endif
+        %}
+      ></textarea>
+      <helper
+        >{% if user.role == 'visitor' %}{% else %}Debes iniciar sesion para
+        comentar{% endif %}</helper
+      >
+      <div
+        style="
+          width: 100%;
+          margin: 1rem 0;
+          display: flex;
+          justify-content: flex-end;
+        "
+      >
+        <input
+          type="submit"
+          value="Enviar"
+          class="primary"
+          {%
+          if
+          user.role
+          !="visitor"
+          %}disabled{%
+          endif
+          %}
+        />
+      </div>
+    </form>
+    {% for comment in entry.comment_list %}
+    <div>
+      <div>
+        <img alt="avatar" src="" />
+        <p>{{comment.fullname}}</p>
+      </div>
+      <p>{{comment.comment}}</p>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 
 {%endblock%}

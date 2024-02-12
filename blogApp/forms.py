@@ -14,6 +14,9 @@ class newEntryForm(forms.Form):
     resume = forms.CharField(widget=forms.Textarea)
     author = forms.CharField(max_length=30)
 
+class commentForm(forms.Form):
+    comment = forms.CharField(max_length=500)
+
 class signupForm(forms.Form):
     name = forms.CharField(max_length=50)
     lastname = forms.CharField(max_length=50)
