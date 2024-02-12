@@ -22,11 +22,10 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
 
     ```bash
     pip install -r requirements.txt
-    
+
 4. Ejecución
 
 Una vez que hayas clonado el repositorio e instalado las dependencias, puedes ejecutar el proyecto con el siguiente comando:
-
     ```bash
     python manage.py runserver
 
