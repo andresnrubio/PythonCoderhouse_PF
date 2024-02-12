@@ -36,9 +36,14 @@ Asegúrate de tener Python y pip instalados en tu sistema antes de seguir los pa
 
 ## Credenciales de Prueba
 ### Administrador
-Nombre de Usuario: admin
+
+Nombre de Usuario: admin@admin.com
+
 Contraseña: admin123
+
 ### Visitante
+
 Nombre de Usuario: visitor@visitor.com
+
 Contraseña: visitor123
 
