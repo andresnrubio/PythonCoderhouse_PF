@@ -34,11 +34,11 @@ El proyecto estará disponible en http://http://127.0.0.1:8000//.
 Prerrequisitos
 Asegúrate de tener Python y pip instalados en tu sistema antes de seguir los pasos anteriores.
 
-Credenciales de Prueba
-Administrador
+## Credenciales de Prueba
+# Administrador
 Nombre de Usuario: admin
 Contraseña: admin123
-Visitante
+# Visitante
 Nombre de Usuario: visitor@visitor.com
 Contraseña: visitor123
 
