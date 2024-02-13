@@ -15,10 +15,10 @@ class BlogEntry(models.Model):
     def __str__(self) -> str:
         return super().__str__()
     
-class Comment(models.Model):
-    fullname = models.CharField(max_length=100, default="Anonimo")
-    comment = models.CharField(max_length=400)
-    date = models.DateField()
+# class Comment(models.Model):
+#     fullname = models.CharField(max_length=100, default="Anonimo")
+#     comment = models.CharField(max_length=400)
+#     date = models.DateField()
 
 class user(models.Model):
     ROLE_CHOICES = [

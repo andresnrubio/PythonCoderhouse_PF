@@ -31,7 +31,13 @@
 <div id="main">
   <div class="inner">
     {% comment %} {% if user.role == 'visitor' %} {% endcomment %}
-    <form action="/newentry/" method="POST" enctype="multipart/form-data">
+    <form
+      action="{{ request.path }}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+
       <label>Dejame un comentario</label>
       <textarea
         type="text"
@@ -42,13 +48,7 @@
         rows="1"
         cols="20"
         required
-        {%
-        if
-        user.role
-        !="visitor"
-        %}disabled{%
-        endif
-        %}
+        {%  if user.role %}disabled{% endif %}
       ></textarea>
       <helper
         >{% if user.role == 'visitor' %}{% else %}Debes iniciar sesion para
@@ -66,26 +66,126 @@
           type="submit"
           value="Enviar"
           class="primary"
-          {%
-          if
-          user.role
-          !="visitor"
-          %}disabled{%
-          endif
-          %}
+          {% if user.role != "visitor"%} disabled {%endif%}
         />
       </div>
     </form>
     {% for comment in entry.comment_list %}
-    <div>
-      <div>
-        <img alt="avatar" src="" />
-        <p>{{comment.fullname}}</p>
+    <div style="display: flex; gap: 1rem">
+      <img
+        alt="avatar"
+        src="{% static 'assets/' %}avatar.png"
+        style="height: 40px"
+      />
+      <div
+        style="
+          border-bottom: 1px solid #c9c9c9;
+          width: 100%;
+          padding-bottom: 2rem;
+        "
+      >
+        <div
+          style="
+            height: 25px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+          "
+        >
+          <p style="align-self: center; margin: 0 0 0 0">
+            <b style="align-self: center">{{comment.fullname}}</b>
+          </p>
+        {% if user.role == "moderator" or comment.fullname == "{{user.name}} {{user.lastname}}"%}
+          <button style="all: unset" onclick="edit({{ forloop.counter }})">
+            <img
+              id="{{ forloop.counter }}"
+              alt="edit"
+              src="{% static 'assets/' %}edit_icon.png"
+              style="height: 30px"
+            />
+          </button>
+        {% endif %}
+        </div>
+		<form
+		action="{{ request.path }}"
+		method="POST"
+		enctype="multipart/form-data"
+	  >
+        <div id="commentContainer{{ forloop.counter }}">
+          <p
+            style="margin: 0 0.5rem; gap: 2rem"
+            id="commentText{{ forloop.counter }}"
+          >{{comment.comment}}
+          </p>
+
+		  {% csrf_token %}
+          <div style="display: flex; justify-content: center; gap: 2rem">
+			<button
+            type="submit"
+            name="action"
+            value="delete"
+            id="buttonDelete{{forloop.counter}}"
+            style="display: none; margin-top: 0.5rem"
+            class="reset"
+        >
+            Eliminar
+        </button>
+        <button
+            type="submit"
+            name="action"
+            value="submit"
+            id="button{{forloop.counter}}"
+            style="display: none; margin-top: 0.5rem"
+            class="primary"
+        >
+            Enviar
+        </button>
+		<input name='id' value="{{forloop.counter}}" style="display: none"/>
+          </div>
+		</form>
+        </div>
       </div>
-      <p>{{comment.comment}}</p>
     </div>
     {% endfor %}
   </div>
 </div>
+
+<script>
+  const edit = (id) => {
+  	let commentContainer= document.getElementById(`commentContainer${id}`);
+
+  	let commentText= document.getElementById(`commentText${id}`)
+  	let textarea = document.getElementById(`textarea${id}`);
+
+  	if(commentText !== null){
+  		let textarea = document.createElement(`textarea`);
+  		textarea.setAttribute('id', `textarea${id}`)
+  		textarea.setAttribute('name', `textarea${id}`)
+  		textarea.textContent = commentText.textContent;
+
+  		commentContainer.replaceChild(textarea, document.getElementById(`commentText${id}`));
+  		let sendEdit = document.getElementById(`button${id}`)
+  		let deleteComment = document.getElementById(`buttonDelete${id}`)
+  		sendEdit.style.display = 'block'
+  		deleteComment.style.display = 'block'
+  		textarea.focus();
+  	}else{
+  		commentText = document.createElement('text');
+  		commentText.setAttribute('id', `commentText${id}`)
+  		commentText.textContent = textarea.textContent
+  		commentContainer.replaceChild(commentText, document.getElementById(`textarea${id}`));
+  		let sendEdit = document.getElementById(`button${id}`)
+  		let deleteComment = document.getElementById(`buttonDelete${id}`)
+  		sendEdit.style.display = 'none'
+  		deleteComment.style.display = 'none'
+
+  	}
+
+  	var submitButton = document.getElementById("submit-comment");
+  	{% comment %} submitButton.style.display = "block";  
+  	{% endcomment %}
+  };
+</script>
 
 {%endblock%}

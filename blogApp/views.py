@@ -5,8 +5,8 @@ import os
 from blogApp.models import BlogEntry, user
 from blogApp.forms import newEntryForm, signupForm, loginForm, commentForm
 from datetime import datetime
+from django.utils import timezone
 from django.contrib import messages
-
 
 
 def redirectToHome(request):
@@ -19,9 +19,9 @@ def home(request):
     template = loader.get_template("index.html")
 
     user = {}
-    
-    if('logged' in request.session):
-        user['role']  = request.session['role']
+
+    if "logged" in request.session:
+        user["role"] = request.session["role"]
         print(user)
 
     dictionary = {"entries": entries, "user": user}
@@ -31,17 +31,44 @@ def home(request):
     return HttpResponse(document)
 
 
+@csrf_exempt
 def entryDetail(request, entryId):
     entry = BlogEntry.objects.get(pk=entryId)
 
     if request.method == "POST":
         form = commentForm(request.POST)
+        if form.is_valid():
+
+            current_date = timezone.now()
+                
+            newComment = {
+                "comment": request.POST["comment"],
+                "fullname": f"{request.session['name']} {request.session['lastname']}",
+                "date": current_date.strftime("%Y-%m-%d")
+            }
+            entry.comment_list.append(newComment)
+            
+            entry.save()
+        else:
+            if "action" in request.POST:
+                action = request.POST.get("action")
+                if action == "delete":
+                    entry.comment_list.pop(int(request.POST['id']) - 1)
+                    entry.save()
+                    pass
+                elif action == "submit":
+                    print(request.POST['id'])
+                    updated_comment = request.POST.get(f"textarea{request.POST['id']}")
+                    print(entry.comment_list)
+                    entry.comment_list[int(request.POST['id']) - 1]["comment"] = updated_comment
+                    print(entry.comment_list)
+                    entry.save()
+                    pass
 
     user = {}
 
-    if('logged' in request.session):
-        user['role']  = request.session['role']
-        print(user)
+    if "logged" in request.session:
+        user["role"] = request.session["role"]
 
     template = loader.get_template("entryDetail.html")
 
@@ -165,24 +192,24 @@ def login(request):
         form = loginForm(request.POST)
 
         if form.is_valid():
-            email = request.POST.get('email')
-            password = request.POST.get('password')
+            email = request.POST.get("email")
+            password = request.POST.get("password")
             try:
                 userExists = user.objects.get(email=email)
                 if userExists.password == password:
-                    request.session['name'] = userExists.name
-                    request.session['lastname'] = userExists.lastname
-                    request.session['email'] = userExists.email
-                    request.session['role'] = userExists.role
-                    request.session['logged'] = True
-                
-                    return redirect('/home/')     
+                    request.session["name"] = userExists.name
+                    request.session["lastname"] = userExists.lastname
+                    request.session["email"] = userExists.email
+                    request.session["role"] = userExists.role
+                    request.session["logged"] = True
+
+                    return redirect("/home/")
                 else:
                     # Password is incorrect
-                    messages.error(request, 'Invalid email or password.')
+                    messages.error(request, "Invalid email or password.")
             except user.DoesNotExist:
                 # User with provided email does not exist
-                messages.error(request, 'Invalid email or password.')
+                messages.error(request, "Invalid email or password.")
 
     template = loader.get_template("login.html")
 
@@ -192,11 +219,12 @@ def login(request):
 
     return HttpResponse(document)
 
+
 def logout(request):
-    
     request.session.flush()
-                    
-    return redirect('/login/')
+
+    return redirect("/login/")
+
 
 @csrf_exempt
 def signup(request):
@@ -204,16 +232,16 @@ def signup(request):
         form = signupForm(request.POST)
         if form.is_valid():
             informacion = form.cleaned_data
-            
+
             newUser = user(
                 name=informacion["name"],
                 lastname=informacion["lastname"],
                 email=informacion["email"],
                 password=informacion["password"],
             )
-            
+
             newUser.save()
-            
+
             return redirect("/")
 
     template = loader.get_template("signup.html")
