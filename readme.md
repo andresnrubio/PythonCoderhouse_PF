@@ -11,23 +11,29 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
 1. Clona este repositorio en tu máquina local usando el siguiente comando:
 
    ```bash
-   git clone https://github.com/your_username/your_repository.git
+   git clone https://github.com/andresnrubio/PythonCoderhouse_PF
 
 2. Navega al directorio del proyecto:
 
     ```bash
-    cd your_repository
+    cd PythonCoderhouse_PF
 
 3. Instala las dependencias necesarias usando pip:
 
     ```bash
     pip install -r requirements.txt
+or
+
+    pip3 install -r requirements.txt
 
 4. Ejecución
 
 Una vez que hayas clonado el repositorio e instalado las dependencias, puedes ejecutar el proyecto con el siguiente comando:
 
     python manage.py runserver
+or
+
+    python3 manage.py runserver
 
 El proyecto estará disponible en http://http://127.0.0.1:8000//.
 
