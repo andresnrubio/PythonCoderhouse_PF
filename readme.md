@@ -46,7 +46,7 @@ Contraseña: coderhouse123
 
 Nombre de Usuario: visitor@visitor.com
 
-Contraseña: visitor123
+Contraseña: coderhouse123
 
 ----------------
 
