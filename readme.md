@@ -35,11 +35,12 @@ Prerrequisitos
 Asegúrate de tener Python y pip instalados en tu sistema antes de seguir los pasos anteriores.
 
 ## Credenciales de Prueba
-### Administrador
 
-Nombre de Usuario: admin@admin.com
+### Creador entradas blog
 
-Contraseña: admin123
+Nombre de Usuario: creator@creator.com
+
+Contraseña: coderhouse123
 
 ### Visitante
 
@@ -47,3 +48,10 @@ Nombre de Usuario: visitor@visitor.com
 
 Contraseña: visitor123
 
+----------------
+
+### Administrador
+
+Nombre de Usuario: admin
+
+Contraseña: coderhouse
