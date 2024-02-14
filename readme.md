@@ -55,3 +55,19 @@ Contraseña: coderhouse123
 Nombre de Usuario: admin
 
 Contraseña: coderhouse
+
+----------------
+
+### Videos funcionamiento
+
+Demostracion perfil creador:
+
+![ezgif-5-4177c8134b](https://github.com/andresnrubio/PythonCoderhouse_PF/assets/87342325/aafc3a70-9c53-4447-b754-20f3b430fa02)
+
+https://drive.google.com/file/d/1zvIlEaToAb5k-aU4oDEMVUHUPPyZKiv7/view?usp=sharing
+
+Demostracion perfil visitante:
+
+![ezgif-5-557f4b6cda](https://github.com/andresnrubio/PythonCoderhouse_PF/assets/87342325/bd15181c-e6df-4c2f-883b-493c5a9b0470)
+
+https://drive.google.com/file/d/1GLC8o8rF_8qNqdLdpZOxbaKlL3gt8Bva/view?usp=sharing
