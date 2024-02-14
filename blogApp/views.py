@@ -57,11 +57,8 @@ def entryDetail(request, entryId):
                     entry.save()
                     pass
                 elif action == "submit":
-                    print(request.POST['id'])
                     updated_comment = request.POST.get(f"textarea{request.POST['id']}")
-                    print(entry.comment_list)
                     entry.comment_list[int(request.POST['id']) - 1]["comment"] = updated_comment
-                    print(entry.comment_list)
                     entry.save()
                     pass
 
@@ -69,6 +66,8 @@ def entryDetail(request, entryId):
 
     if "logged" in request.session:
         user["role"] = request.session["role"]
+        user["fullname"] = f"{request.session['name']} {request.session['lastname']}"
+
 
     template = loader.get_template("entryDetail.html")
 
@@ -148,7 +147,6 @@ def newEntry(request):
             document = template.render(dictionary)
 
             return HttpResponse(document)
-    # else:
     admin = True
 
     places = []
@@ -158,8 +156,6 @@ def newEntry(request):
     dictionary = {"admin": admin, "places": places}
 
     document = template.render(dictionary)
-
-    # return render(request, "newentry/" , dictiona ry)
 
     return HttpResponse(document)
 
@@ -205,10 +201,8 @@ def login(request):
 
                     return redirect("/home/")
                 else:
-                    # Password is incorrect
                     messages.error(request, "Invalid email or password.")
             except user.DoesNotExist:
-                # User with provided email does not exist
                 messages.error(request, "Invalid email or password.")
 
     template = loader.get_template("login.html")

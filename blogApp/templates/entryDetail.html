@@ -3,6 +3,7 @@
 <div id="main">
   <div class="inner">
     <h1>{{entry.title}}</h1>
+
     <span class="image main"
       ><img
         src="{% static 'assets/' %}{{ entry.imgUrl }}"
@@ -48,7 +49,7 @@
         rows="1"
         cols="20"
         required
-        {%  if user.role %}disabled{% endif %}
+        {%  if user.role != 'visitor'%}disabled{% endif %}
       ></textarea>
       <helper
         >{% if user.role == 'visitor' %}{% else %}Debes iniciar sesion para
@@ -96,7 +97,7 @@
           <p style="align-self: center; margin: 0 0 0 0">
             <b style="align-self: center">{{comment.fullname}}</b>
           </p>
-        {% if user.role == "moderator" or comment.fullname == "{{user.name}} {{user.lastname}}"%}
+        {% if user.role == "moderator" or user.fullname == comment.fullname %}
           <button style="all: unset" onclick="edit({{ forloop.counter }})">
             <img
               id="{{ forloop.counter }}"
